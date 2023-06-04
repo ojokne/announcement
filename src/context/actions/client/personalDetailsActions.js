@@ -1,0 +1,4 @@
+export const PERSONAL_DETAILS_ACTIONS = {
+  ADD_DETAILS: "ADD_DETAILS",
+  RESET: "RESET",
+};
