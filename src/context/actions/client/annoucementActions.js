@@ -1,0 +1,4 @@
+export const ANNOUNCEMENT_ACTIONS = {
+  ADD_DETAILS: "ADD_DETAILS",
+  RESET: "RESET",
+};
