@@ -1,12 +1,12 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import ClientApp from "./apps/ClientApp";
-import Box from "@mui/material/Box";
+import Login from "./pages/Login";
 
 function App() {
   return (
-    <Box component="div">
-      <ClientApp />
-    </Box>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+    </Routes>
   );
 }
 
