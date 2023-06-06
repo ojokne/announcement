@@ -81,6 +81,7 @@ const Checkout = () => {
 
             <Typography
               variant="body2"
+              color="secondary"
               sx={{ fontSize: 12, padding: 0, margin: 0 }}
             >
               Number of times
@@ -95,6 +96,7 @@ const Checkout = () => {
 
             <Typography
               variant="body2"
+              color="secondary"
               sx={{ fontSize: 12, padding: 0, margin: 0 }}
             >
               Date to broadcast
@@ -111,6 +113,7 @@ const Checkout = () => {
 
             <Typography
               variant="body2"
+              color="secondary"
               sx={{ fontSize: 12, padding: 0, margin: 0 }}
             >
               Amount
