@@ -52,62 +52,60 @@ function PersonalDetails() {
     navigate("/client/create-announcement");
   };
   return (
-    <div>
-      <Box style={outer} component="form">
-        <Box p={1} width="90%">
-          <TextField
-            label="Full Name"
-            size="small"
-            fullWidth
-            margin="normal"
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-              setNameError(false);
-            }}
-            helperText={nameError ? "Name is required" : ""}
-            error={nameError}
-          />
-          <TextField
-            label="Phone Number"
-            size="small"
-            type="number"
-            fullWidth
-            margin="normal"
-            value={phoneNumber}
-            onChange={(e) => {
-              setPhoneNumber(e.target.value);
-              setPhoneNumberError(false);
-            }}
-            helperText={phoneNumberError ? "Phone number is required" : ""}
-            error={phoneNumberError}
-          />
+    <Box style={outer} component="form">
+      <Box p={1} width="90%">
+        <TextField
+          label="Full Name"
+          size="small"
+          fullWidth
+          margin="normal"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+            setNameError(false);
+          }}
+          helperText={nameError ? "Name is required" : ""}
+          error={nameError}
+        />
+        <TextField
+          label="Phone Number"
+          size="small"
+          type="number"
+          fullWidth
+          margin="normal"
+          value={phoneNumber}
+          onChange={(e) => {
+            setPhoneNumber(e.target.value);
+            setPhoneNumberError(false);
+          }}
+          helperText={phoneNumberError ? "Phone number is required" : ""}
+          error={phoneNumberError}
+        />
 
-          <TextField
-            label="Email (optional)"
-            size="small"
-            type="email"
-            fullWidth
-            margin="normal"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
+        <TextField
+          label="Email (optional)"
+          size="small"
+          type="email"
+          fullWidth
+          margin="normal"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
 
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={(e) => {
-              handlePersonalDetails(e);
-            }}
-            endIcon={<SendIcon />}
-          >
-            Next
-          </Button>
-        </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={(e) => {
+            handlePersonalDetails(e);
+          }}
+          endIcon={<SendIcon />}
+        >
+          Next
+        </Button>
       </Box>
-    </div>
+    </Box>
   );
 }
 
