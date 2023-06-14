@@ -36,7 +36,12 @@ const Checkout = () => {
     navigate("/client/create-announcement");
   };
 
-  const handleCheckout = (e) => {};
+  const handleCheckout = (e) => {
+    setTimeout(() => {
+      setOpen(false);
+      navigate("/client/checkout-message");
+    }, 3000);
+  };
 
   const calculateAmount = () => {
     const numberOfTimes = parseInt(announcementDetails.numberOfTimes);
