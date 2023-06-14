@@ -5,6 +5,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { Outlet } from "react-router-dom";
 import { useStep } from "../../context/client/ClientProvider";
+import ClientMenuAppBar from "../../components/client/ClientMenuAppBar";
 
 const steps = ["Personal Details", "Create an announcement", "Check out"];
 
@@ -19,16 +20,19 @@ const ClientWrapper = () => {
   const { step } = useStep();
 
   return (
-    <Box style={outer}>
-      <Box p={1} width="90%">
-        <Stepper activeStep={step} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-        <Outlet />
+    <Box component="div">
+      <ClientMenuAppBar />
+      <Box style={outer}>
+        <Box p={1} width="90%">
+          <Stepper activeStep={step} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+          <Outlet />
+        </Box>
       </Box>
     </Box>
   );
