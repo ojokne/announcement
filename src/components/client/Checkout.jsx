@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const outer = {
   display: "flex",
@@ -18,6 +20,10 @@ const outer = {
 const Checkout = () => {
   const { announcementDetails } = useAnnouncement();
   const { stepDispatch } = useStep();
+
+  // state to open and close backdrop
+
+  const [open, setOpen] = useState(false);
 
   const [date, setDate] = useState("");
   const [amount, setAmount] = useState(0); // [1
@@ -44,6 +50,13 @@ const Checkout = () => {
       setAmount(numberOfTimes * 10000);
     }
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
   useEffect(() => {
     if (
       announcementDetails.message === "" ||
@@ -57,6 +70,20 @@ const Checkout = () => {
     setDate(new Date(announcementDetails.dateToBroadcast).toDateString());
     calculateAmount();
   }, [announcementDetails]);
+
+  if (open) {
+    return (
+      <div>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+          // onClick={handleClose}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      </div>
+    );
+  }
   return (
     <Box style={outer}>
       <Box p={3} width="90%">
@@ -133,7 +160,10 @@ const Checkout = () => {
             variant="contained"
             color="primary"
             endIcon={<NavigateNextIcon />}
-            onClick={(e) => handleCheckout(e)}
+            onClick={(e) => {
+              handleCheckout(e);
+              handleOpen();
+            }}
           >
             Check out
           </Button>
