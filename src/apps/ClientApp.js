@@ -4,6 +4,8 @@ import SummarizeAnnouncement from "../components/client/SummarizeAnnouncement";
 import PersonalDetails from "../components/client/PersonalDetails";
 import ClientWrapper from "../pages/client/ClientWrapper";
 import Checkout from "../components/client/Checkout";
+import CheckoutMessage from "../components/client/CheckoutMessage";
+import Status from "../components/client/Status";
 
 function ClientApp() {
   return (
@@ -17,6 +19,8 @@ function ClientApp() {
           element={<SummarizeAnnouncement />}
         />
       </Route>
+      <Route path="client/checkout-message" element={<CheckoutMessage />} />
+      <Route path="client/status" element={<Status />} />
     </Routes>
   );
 }
