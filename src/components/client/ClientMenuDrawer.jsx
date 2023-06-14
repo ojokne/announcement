@@ -9,7 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import CreateIcon from "@mui/icons-material/Create";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { Fragment } from "react";
-import { green, orange, red, yellow } from "@mui/material/colors";
+import { green } from "@mui/material/colors";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ const ClientMenuDrawer = ({ toggleDrawer, state }) => {
         </Typography>
         <Divider />
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigate("/radio/death")}>
+          <ListItemButton onClick={() => navigate("/client/personal-details")}>
             <ListItemIcon>
               <CreateIcon sx={{ color: "primary.main" }} />
             </ListItemIcon>
@@ -42,7 +42,7 @@ const ClientMenuDrawer = ({ toggleDrawer, state }) => {
         </ListItem>
 
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigate("/radio/business")}>
+          <ListItemButton onClick={() => navigate("/client/status")}>
             <ListItemIcon>
               <AutorenewIcon sx={{ color: green[500] }} />
             </ListItemIcon>
