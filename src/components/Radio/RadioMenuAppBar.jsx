@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import MenuDrawer from "./MenuDrawer";
+import RadioMenuDrawer from "./RadioMenuDrawer";
 import { useState } from "react";
 
 const MenuAppBar = () => {
@@ -25,7 +25,7 @@ const MenuAppBar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <MenuDrawer toggleDrawer={toggleDrawer} state={state} />
+      <RadioMenuDrawer toggleDrawer={toggleDrawer} state={state} />
       <AppBar position="static">
         <Toolbar>
           <IconButton
