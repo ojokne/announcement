@@ -15,6 +15,8 @@ import { Fragment } from "react";
 import { green, orange, red, yellow } from "@mui/material/colors";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../../config/firebase";
 
 const styles = {
   display: "flex",
@@ -70,7 +72,7 @@ const MenuDrawer = ({ toggleDrawer, state }) => {
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding>
+        <ListItem disablePadding onClick={(e) => handleLogout(e)}>
           <ListItemButton>
             <ListItemIcon>
               <LogoutIcon sx={{ color: red[500] }} />
@@ -81,6 +83,17 @@ const MenuDrawer = ({ toggleDrawer, state }) => {
       </List>
     </Box>
   );
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+
+    try {
+      await signOut(auth);
+      navigate("/login");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div>
