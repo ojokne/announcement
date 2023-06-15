@@ -25,8 +25,8 @@ export const ClientProvider = ({ children }) => {
       message: "",
       numberOfTimes: 1,
       dateToBroadcast: "",
-      category: { label: "Death", value: "Death" },
-      radioStation: { label: "Unity FM", value: "97.7" },
+      category: { label: "", value: "" },
+      radioStation: { id: "", label: "", value: "" },
     }
   );
   return (
