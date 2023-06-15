@@ -39,7 +39,7 @@ const MenuAppBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Radio Unity
+            Announcement
           </Typography>
         </Toolbar>
       </AppBar>
