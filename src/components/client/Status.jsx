@@ -19,6 +19,13 @@ const Status = () => {
   const [refNumber, setRefNumber] = useState("");
   const [refNumberError, setRefNumberError] = useState(false);
 
+  const handleTrackStatus = (e) => {
+    e.preventDefault();
+    if (refNumber === "") {
+      setRefNumberError(true);
+      return;
+    }
+  };
   return (
     <Box component="div">
       <ClientMenuAppBar />
@@ -45,7 +52,7 @@ const Status = () => {
             color="primary"
             sx={{ marginTop: 1 }}
             // endIcon={<NavigateNextIcon />}
-            // onClick={(e) => handleCreateAnnouncement(e)}
+            onClick={(e) => handleTrackStatus(e)}
           >
             Track Status
           </Button>
