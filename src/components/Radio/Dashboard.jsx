@@ -5,10 +5,25 @@ import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied
 import BusinessIcon from "@mui/icons-material/Business";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import Stack from "@mui/material/Stack";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 import RadioMenuAppBar from "./RadioMenuAppBar";
 
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { green, orange } from "@mui/material/colors";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "../../config/firebase";
+import {
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
+import { useAnnouncement } from "../../context/radio/RadioProvider";
+import { ANNOUNCEMENT_ACTIONS } from "../../context/actions/radio/announcementActions";
 const outer = {
   display: "flex",
   justifyContent: "center",
@@ -20,6 +35,119 @@ const outer = {
 };
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const { announcements, announcementDispatch } = useAnnouncement();
+
+  // state to open and close backdrop
+  const [open, setOpen] = useState(false);
+
+  // state to hold death announcements
+  const [death, setDeath] = useState(0);
+
+  // state to hold business announcements
+  const [business, setBusiness] = useState(0);
+
+  // state to hold corporate announcements
+  const [corporate, setCorporate] = useState(0);
+
+  // state to hold amount from death announcements
+  const [amountDeath, setAmountDeath] = useState(0);
+
+  // state to hold amount from business announcements
+  const [amountBusiness, setAmountBusiness] = useState(0);
+
+  // state to hold amount from corporate announcements
+  const [amountCorporate, setAmountCorporate] = useState(0);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  useEffect(() => {
+    setOpen(true);
+    let unsubscribeFromFirestore;
+    const unsubscribeFromAuth = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          const user = await getDoc(doc(db, "users", auth.currentUser.uid));
+          const querySnapshot = query(
+            collection(db, "announcements"),
+            where("radioStation", "==", user.data().radioStation)
+          );
+
+          unsubscribeFromFirestore = onSnapshot(
+            querySnapshot,
+            (querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                // announcements.push({ ...doc.data(), id: doc.id });
+                console.log(doc.data());
+              });
+              // setAnnouncements(announcements);
+              if (querySnapshot.empty) {
+                setOpen(false);
+              } else {
+                const announcementsArray = [];
+                for (let i = 0; i < querySnapshot.docs.length; i++) {
+                  let announcement = {
+                    id: querySnapshot.docs[i].id,
+                    ...querySnapshot.docs[i].data(),
+                  };
+
+                  announcementsArray.push(announcement);
+                  if (announcement.category.toLowerCase() === "death") {
+                    setDeath((prev) => prev + 1);
+                    setAmountDeath((prev) => prev + announcement.amount);
+                  }
+                  if (announcement.category.toLowerCase() === "business") {
+                    setBusiness((prev) => prev + 1);
+                    setAmountBusiness((prev) => prev + announcement.amount);
+                  }
+                  if (announcement.category.toLowerCase() === "corporate") {
+                    setCorporate((prev) => prev + 1);
+                    setAmountCorporate((prev) => prev + announcement.amount);
+                  }
+                }
+                announcementDispatch({
+                  type: ANNOUNCEMENT_ACTIONS.SET_ANNOUNCEMENTS,
+                  announcements: announcementsArray,
+                });
+              }
+              setOpen(false);
+            }
+          );
+        } catch (e) {
+          console.log(e);
+        }
+        setOpen(false);
+      } else {
+        navigate("/login");
+      }
+    });
+
+    return () => {
+      unsubscribeFromAuth();
+      if (unsubscribeFromFirestore) {
+        unsubscribeFromFirestore();
+      }
+    };
+  }, []);
+
+  if (open) {
+    return (
+      <div>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+          // onClick={handleClose}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      </div>
+    );
+  }
   return (
     <Box component="div">
       <RadioMenuAppBar />
@@ -74,21 +202,35 @@ const Dashboard = () => {
                   fontSize: "1.8rem",
                 }}
               >
-                45
+                {death}
               </Typography>
-              <Typography
-                variant="body1"
-                component={RouterLink}
-                to="#"
-                sx={{
-                  paddingTop: 2,
-                  color: "primary.main",
-                  textDecoration: "none",
-                  textAlign: "center",
-                }}
-              >
-                View
-              </Typography>
+              {death === 0 ? (
+                <Typography
+                  variant="body1"
+                  sx={{
+                    paddingTop: 2,
+                    color: "secondary.main",
+                    textDecoration: "none",
+                    textAlign: "center",
+                  }}
+                >
+                  No announcements
+                </Typography>
+              ) : (
+                <Typography
+                  variant="body1"
+                  component={RouterLink}
+                  to="/radio/death"
+                  sx={{
+                    paddingTop: 2,
+                    color: "primary.main",
+                    textDecoration: "none",
+                    textAlign: "center",
+                  }}
+                >
+                  View
+                </Typography>
+              )}
             </Paper>
             <Paper
               elevation={3}
@@ -122,21 +264,35 @@ const Dashboard = () => {
                   fontSize: "1.8rem",
                 }}
               >
-                45
+                {business}
               </Typography>
-              <Typography
-                variant="body1"
-                component={RouterLink}
-                to="#"
-                sx={{
-                  paddingTop: 2,
-                  color: "primary.main",
-                  textDecoration: "none",
-                  textAlign: "center",
-                }}
-              >
-                View
-              </Typography>
+              {business === 0 ? (
+                <Typography
+                  variant="body1"
+                  sx={{
+                    paddingTop: 2,
+                    color: "secondary.main",
+                    textDecoration: "none",
+                    textAlign: "center",
+                  }}
+                >
+                  No announcements
+                </Typography>
+              ) : (
+                <Typography
+                  variant="body1"
+                  component={RouterLink}
+                  to="/radio/business"
+                  sx={{
+                    paddingTop: 2,
+                    color: "primary.main",
+                    textDecoration: "none",
+                    textAlign: "center",
+                  }}
+                >
+                  View
+                </Typography>
+              )}
             </Paper>
             <Paper
               elevation={3}
@@ -170,21 +326,35 @@ const Dashboard = () => {
                   fontSize: "1.8rem",
                 }}
               >
-                45
+                {corporate}
               </Typography>
-              <Typography
-                variant="body1"
-                component={RouterLink}
-                to="#"
-                sx={{
-                  paddingTop: 2,
-                  color: "primary.main",
-                  textDecoration: "none",
-                  textAlign: "center",
-                }}
-              >
-                View
-              </Typography>
+              {corporate === 0 ? (
+                <Typography
+                  variant="body1"
+                  sx={{
+                    paddingTop: 2,
+                    color: "secondary.main",
+                    textDecoration: "none",
+                    textAlign: "center",
+                  }}
+                >
+                  No announcements
+                </Typography>
+              ) : (
+                <Typography
+                  variant="body1"
+                  component={RouterLink}
+                  to="/radio/corporate"
+                  sx={{
+                    paddingTop: 2,
+                    color: "primary.main",
+                    textDecoration: "none",
+                    textAlign: "center",
+                  }}
+                >
+                  View
+                </Typography>
+              )}
             </Paper>
           </Box>
         </Box>
@@ -238,20 +408,7 @@ const Dashboard = () => {
                   fontSize: "1.8rem",
                 }}
               >
-                45,000
-              </Typography>
-              <Typography
-                variant="body1"
-                component={RouterLink}
-                to="#"
-                sx={{
-                  paddingTop: 2,
-                  color: "primary.main",
-                  textDecoration: "none",
-                  textAlign: "center",
-                }}
-              >
-                View
+                {amountDeath.toLocaleString("en-US")}
               </Typography>
             </Paper>
             <Paper
@@ -286,20 +443,7 @@ const Dashboard = () => {
                   fontSize: "1.8rem",
                 }}
               >
-                100,000
-              </Typography>
-              <Typography
-                variant="body1"
-                component={RouterLink}
-                to="#"
-                sx={{
-                  paddingTop: 2,
-                  color: "primary.main",
-                  textDecoration: "none",
-                  textAlign: "center",
-                }}
-              >
-                View
+                {amountBusiness.toLocaleString("en-US")}
               </Typography>
             </Paper>
             <Paper
@@ -334,20 +478,7 @@ const Dashboard = () => {
                   fontSize: "1.8rem",
                 }}
               >
-                50,000
-              </Typography>
-              <Typography
-                variant="body1"
-                component={RouterLink}
-                to="#"
-                sx={{
-                  paddingTop: 2,
-                  color: "primary.main",
-                  textDecoration: "none",
-                  textAlign: "center",
-                }}
-              >
-                View
+                {amountCorporate.toLocaleString("en-US")}
               </Typography>
             </Paper>
           </Box>
