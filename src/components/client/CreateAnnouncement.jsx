@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -14,6 +16,8 @@ import {
 } from "../../context/client/ClientProvider";
 import { STEPPER_ACTIONS } from "../../context/actions/client/stepperActions";
 import { ANNOUNCEMENT_ACTIONS } from "../../context/actions/client/annoucementActions";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 const outer = {
   display: "flex",
@@ -38,6 +42,12 @@ const CATEGORIES = [
 function CreateAnnouncement() {
   const { personalDetails } = usePersonalDetails();
   const { stepDispatch } = useStep();
+
+  // state to control loading screen
+  const [open, setOpen] = useState(true);
+
+  // state to hold radio stations from firebase
+  const [radios, setRadios] = useState([]);
 
   const { announcementDetails, announcementDetailsDispatch } =
     useAnnouncement();
@@ -109,12 +119,44 @@ function CreateAnnouncement() {
     navigate("/client/checkout");
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
   useEffect(() => {
+    const fetchRadioStations = async () => {
+      try {
+        const radioStationRef = await getDocs(collection(db, "radioStations"));
+        for (let i = 0; i < radioStationRef.docs.length; i++) {
+          const { frequency, name } = radioStationRef.docs[i].data();
+          let radio = {
+            id: radioStationRef.docs[i].id,
+            label: name,
+            value: frequency,
+          };
+          setRadios((prev) => [...prev, radio]);
+        }
+        setOpen(false);
+      } catch (e) {}
+    };
     if (personalDetails.name === "" || personalDetails.phoneNumber === "") {
       navigate("/client/personal-details");
     }
+    fetchRadioStations();
   }, [navigate, personalDetails.name, personalDetails.phoneNumber]);
 
+  if (open) {
+    return (
+      <div>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+          // onClick={handleClose}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      </div>
+    );
+  }
   return (
     <Box style={outer} component="form">
       <Box p={1} width="90%">
@@ -159,7 +201,7 @@ function CreateAnnouncement() {
           InputLabelProps={{
             shrink: true,
           }}
-          value={dateToBroadcast}
+          va8lue={dateToBroadcast}
           onChange={(e) => {
             setDateToBroadcast(e.target.value);
             setDateToBroadcastError(false);
@@ -193,7 +235,7 @@ function CreateAnnouncement() {
         <Autocomplete
           sx={{ marginBottom: "20px", marginTop: "20px" }}
           disablePortal
-          options={radioStations}
+          options={radios}
           onChange={(e, option) => {
             setRadioStation(option);
             setRadioStationError(false);
