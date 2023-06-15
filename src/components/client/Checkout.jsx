@@ -1,5 +1,8 @@
 import { Box, Divider, Paper, Typography } from "@mui/material";
-import { useAnnouncement } from "../../context/client/ClientProvider";
+import {
+  useAnnouncement,
+  usePersonalDetails,
+} from "../../context/client/ClientProvider";
 import { STEPPER_ACTIONS } from "../../context/actions/client/stepperActions";
 import { useStep } from "../../context/client/ClientProvider";
 import { useEffect, useState } from "react";
@@ -9,6 +12,8 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 const outer = {
   display: "flex",
@@ -19,6 +24,7 @@ const outer = {
 };
 const Checkout = () => {
   const { announcementDetails } = useAnnouncement();
+  const { personalDetails } = usePersonalDetails();
   const { stepDispatch } = useStep();
 
   // state to open and close backdrop
@@ -36,11 +42,27 @@ const Checkout = () => {
     navigate("/client/create-announcement");
   };
 
-  const handleCheckout = (e) => {
-    setTimeout(() => {
-      setOpen(false);
-      navigate("/client/checkout-message");
-    }, 3000);
+  const handleCheckout = async (e) => {
+    try {
+      const docRef = await addDoc(collection(db, "announcements"), {
+        name: personalDetails.name,
+        email: personalDetails.email,
+        phone: personalDetails.phoneNumber,
+        message: announcementDetails.message,
+        numberOfTimes: announcementDetails.numberOfTimes,
+        dateToBroadcast: announcementDetails.dateToBroadcast,
+        radioStation: announcementDetails.radioStation.id,
+        category: announcementDetails.category.value,
+        date: new Date().toDateString(),
+        amount: amount,
+        status: "pending",
+        paid: false,
+      });
+      console.log("Document written with ID: ", docRef.id);
+      navigate("/client/checkout-message", { state: { id: docRef.id } });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const calculateAmount = () => {
@@ -74,6 +96,7 @@ const Checkout = () => {
     }
     setDate(new Date(announcementDetails.dateToBroadcast).toDateString());
     calculateAmount();
+    console.log(announcementDetails);
   }, [announcementDetails]);
 
   if (open) {
