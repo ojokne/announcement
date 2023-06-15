@@ -32,7 +32,7 @@ const Checkout = () => {
   const [open, setOpen] = useState(false);
 
   const [date, setDate] = useState("");
-  const [amount, setAmount] = useState(0); // [1
+  const [amount, setAmount] = useState(0); //
   const navigate = useNavigate();
 
   const handleBack = (e) => {
