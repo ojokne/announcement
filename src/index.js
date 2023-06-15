@@ -11,6 +11,7 @@ import ClientApp from "./apps/ClientApp";
 import { ClientProvider } from "./context/client/ClientProvider";
 import RadioApp from "./apps/RadioApp";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { RadioProvider } from "./context/radio/RadioProvider";
 
 const theme = createTheme({
   palette: {
@@ -29,7 +30,9 @@ root.render(
         <ClientProvider>
           <ClientApp />
         </ClientProvider>
-        <RadioApp />
+        <RadioProvider>
+          <RadioApp />
+        </RadioProvider>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>
