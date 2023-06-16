@@ -81,11 +81,6 @@ const Dashboard = () => {
           unsubscribeFromFirestore = onSnapshot(
             querySnapshot,
             (querySnapshot) => {
-              querySnapshot.forEach((doc) => {
-                // announcements.push({ ...doc.data(), id: doc.id });
-                console.log(doc.data());
-              });
-              // setAnnouncements(announcements);
               if (querySnapshot.empty) {
                 setOpen(false);
               } else {
