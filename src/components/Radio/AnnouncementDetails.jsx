@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../config/firebase";
 import { Paper, Typography } from "@mui/material";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 const outer = {
   display: "flex",
@@ -24,35 +24,30 @@ const outer = {
 
 const AnnouncementDetails = () => {
   const { state } = useLocation();
-
   const navigate = useNavigate();
 
   // state to open and close backdrop
   const [open, setOpen] = useState(false);
 
-  console.log(state);
+  const [isPending, setIsPending] = useState(false);
 
   const handleBack = (e) => {
     e.preventDefault();
-    navigate("/radio/death/pending");
+    navigate(state.backLink);
   };
 
   const handleConfirmBroadcast = async (e, state) => {
-    console.log(state.id);
     try {
       setOpen(true);
-      await setDoc(doc(db, "announcements", state.id), {
+
+      await updateDoc(doc(db, "announcements", state.id), {
         status: "complete",
       });
       setOpen(false);
-      navigate("/radio/death/pending");
+      navigate("/radio");
     } catch (e) {
       console.log(e);
     }
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
   };
 
   useEffect(() => {
@@ -61,6 +56,10 @@ const AnnouncementDetails = () => {
       if (!user) {
         setOpen(false);
         navigate("/login");
+      }
+
+      if (state.status === "pending") {
+        setIsPending(true);
       }
       setOpen(false);
     });
@@ -90,7 +89,6 @@ const AnnouncementDetails = () => {
         <Paper sx={{ p: 2, m: 2, width: "90%" }}>
           <Typography
             variant="h5"
-            component="p"
             color="secondary"
             sx={{ marginTop: 1, marginBottom: 1, paddingLeft: 1 }}
           >
@@ -166,7 +164,12 @@ const AnnouncementDetails = () => {
             >
               Message
             </Typography>
-            <Typography variant="p">{state.message}</Typography>
+            <Typography
+              component="p"
+              sx={{ textAlign: "justify", paddingTop: 1, paddingBottom: 1 }}
+            >
+              {state.message}
+            </Typography>
           </Box>
 
           <Box component="div" display="flex" justifyContent="space-between">
@@ -178,16 +181,18 @@ const AnnouncementDetails = () => {
             >
               Back
             </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              endIcon={<NavigateNextIcon />}
-              onClick={(e) => {
-                handleConfirmBroadcast(e, state);
-              }}
-            >
-              Confirm Broadcast
-            </Button>
+            {isPending && (
+              <Button
+                variant="contained"
+                color="primary"
+                endIcon={<NavigateNextIcon />}
+                onClick={(e) => {
+                  handleConfirmBroadcast(e, state);
+                }}
+              >
+                Confirm Broadcast
+              </Button>
+            )}
           </Box>
         </Paper>
       </Box>

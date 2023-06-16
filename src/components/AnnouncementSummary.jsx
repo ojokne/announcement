@@ -6,13 +6,13 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 
-const AnnouncementSummary = ({ announcement }) => {
+const AnnouncementSummary = ({ announcement, backLink }) => {
   const navigate = useNavigate();
   const handleAnnouncementClick = (e) => {
     e.preventDefault();
     console.log("clicked");
     navigate(`/radio/announcement/${announcement.id}`, {
-      state: announcement,
+      state: { ...announcement, backLink },
     });
   };
   return (
