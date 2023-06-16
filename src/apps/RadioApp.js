@@ -5,6 +5,7 @@ import Corporate from "../components/Radio/Corporate";
 import Business from "../components/Radio/Business";
 import DeathPending from "../components/Radio/DeathPending";
 import AnnouncementDetails from "../components/Radio/AnnouncementDetails";
+import DeathComplete from "../components/Radio/DeathComplete";
 
 function RadioApp() {
   return (
@@ -12,6 +13,7 @@ function RadioApp() {
       <Route path="/radio" element={<Dashboard />} />
       <Route path="/radio/death" element={<Death />} />
       <Route path="/radio/death/pending" element={<DeathPending />} />
+      <Route path="/radio/death/complete" element={<DeathComplete />} />
       <Route path="/radio/business" element={<Business />} />
       <Route path="/radio/corporate" element={<Corporate />} />
 
