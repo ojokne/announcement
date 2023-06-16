@@ -8,6 +8,8 @@ import AnnouncementDetails from "../components/Radio/AnnouncementDetails";
 import DeathComplete from "../components/Radio/DeathComplete";
 import BusinessPending from "../components/Radio/BusinessPending";
 import BusinessComplete from "../components/Radio/BusinessComplete";
+import CorporatePending from "../components/Radio/CorporatePending";
+import CorporateComplete from "../components/Radio/CorporateComplete";
 
 function RadioApp() {
   return (
@@ -20,6 +22,8 @@ function RadioApp() {
       <Route path="/radio/business/pending" element={<BusinessPending />} />
       <Route path="/radio/business/complete" element={<BusinessComplete />} />
       <Route path="/radio/corporate" element={<Corporate />} />
+      <Route path="/radio/corporate/pending" element={<CorporatePending />} />
+      <Route path="/radio/corporate/complete" element={<CorporateComplete />} />
 
       {/* route for announcement details */}
       <Route path="/radio/announcement/:id" element={<AnnouncementDetails />} />
