@@ -50,7 +50,10 @@ const DeathPending = () => {
           if (announcementsArray.length > 0) {
             for (let i = 0; i < announcementsArray.length; i++) {
               let announcement = announcementsArray[i];
-              if (announcement.status === "pending") {
+              if (
+                announcement.category.toLowerCase() === "death" &&
+                announcement.status === "pending"
+              ) {
                 setPending((prev) => [...prev, announcement]);
               }
             }
@@ -135,7 +138,11 @@ const DeathPending = () => {
             </Typography>
             {pending.map((announcement, index) => {
               return (
-                <AnnouncementSummary announcement={announcement} key={index} />
+                <AnnouncementSummary
+                  announcement={announcement}
+                  key={index}
+                  backLink="/radio/death/pending"
+                />
               );
             })}
           </Box>

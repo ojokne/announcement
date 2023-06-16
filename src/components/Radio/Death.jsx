@@ -48,6 +48,9 @@ const Death = () => {
         if (announcements.hasOwnProperty("announcements")) {
           let announcementsArray = Object.values(announcements.announcements);
           for (let i = 0; i < announcementsArray.length; i++) {
+            if (announcementsArray[i].category.toLowerCase() !== "death") {
+              continue;
+            }
             setAmount((prev) => prev + announcementsArray[i].amount);
             if (announcementsArray[i].status === "pending") {
               setPending((prev) => prev + 1);
@@ -140,16 +143,13 @@ const Death = () => {
               </Typography>
               <Typography
                 variant="body1"
-                component={RouterLink}
-                to="#"
                 sx={{
                   paddingTop: 2,
-                  color: "primary.main",
-                  textDecoration: "none",
+                  color: "secondary.main",
                   textAlign: "center",
                 }}
               >
-                View
+                UGX
               </Typography>
             </Paper>
             <Paper
