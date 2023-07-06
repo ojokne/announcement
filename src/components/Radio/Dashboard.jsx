@@ -85,6 +85,7 @@ const Dashboard = () => {
                 setOpen(false);
               } else {
                 const announcementsArray = [];
+                console.log(querySnapshot.docs[0].data());
                 for (let i = 0; i < querySnapshot.docs.length; i++) {
                   let announcement = {
                     id: querySnapshot.docs[i].id,
