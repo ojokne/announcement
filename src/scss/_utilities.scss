@@ -1,0 +1,40 @@
+@use "colors";
+
+.text-center {
+  text-align: center;
+}
+
+.p-1{
+  padding: 18px;
+}
+
+.primary-color{
+  color: colors.$primary-color;
+}
+
+.bg-primary-color{
+  background-color: colors.$primary-color;
+  a{
+    color: white;
+  }
+}
+
+.bg-primary-color-outline{
+  border: 1px solid colors.$primary-color;
+  a{
+    
+    color: colors.$primary-color;
+  }
+}
+
+
+.bg-primary-color:hover{
+  background-color: colors.$oxford-blue;
+  transform: scale(.96);
+}
+
+.bg-primary-color-outline:hover{
+  border: 1px solid colors.$primary-color;
+  transform: scale(.96);
+}
+

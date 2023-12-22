@@ -1,0 +1,11 @@
+@use "reset";
+@use "utilities";
+@use "fonts";
+@use "variables";
+@use "colors";
+@use "menu";
+
+.icon-lg{
+    font-size: 144px;
+    color: colors.$secondary-color;
+}
