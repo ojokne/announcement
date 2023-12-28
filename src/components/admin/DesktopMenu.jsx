@@ -41,6 +41,23 @@ const DesktopMenu = () => {
           </NavLink>
         </li>
 
+        <li className="mb-3">
+          <NavLink
+            to="/admin/users"
+            style={({ isActive }) => {
+              return isActive ? { color: "#FFFC81" } : { color: "#fff" };
+            }}
+          >
+            <div className="d-flex align-items-center">
+              <span>
+                <i className="bi bi-person"></i>
+              </span>
+
+              <span className="ms-2">Users</span>
+            </div>
+          </NavLink>
+        </li>
+
         <li>
           <NavLink
             to="/admin/announcements"
