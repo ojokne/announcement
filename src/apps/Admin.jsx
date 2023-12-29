@@ -9,9 +9,9 @@ const Admin = () => {
     <Routes>
       <Route path="/admin" element={<Wrapper />}>
         <Route path="radios" element={<Radios />} />
-        <Route path="add-radio" element={<AddRadio />} />
+        <Route path="add_radio" element={<AddRadio />} />
         <Route path="users" element={<Users />} />
-        <Route path="add-user" element={<AddUser />} />
+        <Route path="add_user" element={<AddUser />} />
       </Route>
     </Routes>
   );
