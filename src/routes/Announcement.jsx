@@ -8,7 +8,7 @@ import Checkout from "../components/Announcement/Checkout";
 const Announcement = () => {
   return (
     <Routes>
-      <Route path="/create" element={<Wrapper />}>
+      <Route path="/" element={<Wrapper />}>
         <Route index element={<PersonalDetails />} />
         <Route path="announcement_details" element={<AnnouncementDetails />} />
         <Route path="review" element={<Review />} />
