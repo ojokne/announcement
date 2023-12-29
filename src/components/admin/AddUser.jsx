@@ -31,7 +31,7 @@ const AddUser = () => {
 
         {/* user contact*/}
         <div class="mb-3">
-          <label for="name" class="form-label">
+          <label for="contact" class="form-label">
             Contact
           </label>
           <input
@@ -44,11 +44,11 @@ const AddUser = () => {
 
         {/* radio station user works at */}
         <div class="mb-3">
-          <label for="name" class="form-label">
+          <label for="radio" class="form-label">
             Radio
           </label>
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
+          <select class="form-select" id="radio" aria-label="Radio">
+            <option defaultValue="0">Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
