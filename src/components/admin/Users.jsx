@@ -7,7 +7,7 @@ const Users = () => {
         <h2 className="text-muted fs-3">Users</h2>
         <div className="w-50">
           <input
-            class="form-control w-100"
+            className="form-control w-100"
             list="datalistOptions"
             id="radioDataList"
             placeholder="Type to search..."

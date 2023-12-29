@@ -4,39 +4,39 @@ const AddRadio = () => {
       <h2 className="text-muted fs-3">Add Radio</h2>
       <div className=" bg-light rounded p-3 my-3">
         {/* radio station name */}
-        <div class="mb-3">
-          <label for="name" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
             Name
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="name"
             placeholder="Example FM"
           />
         </div>
 
         {/* radio station frequency */}
-        <div class="mb-3">
-          <label for="frequency" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="frequency" className="form-label">
             Frequency
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="frequency"
             placeholder="90.0"
           />
         </div>
 
         {/* radio station email */}
-        <div class="mb-3">
-          <label for="email" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
             Email
           </label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             id="email"
             placeholder="someone@example.com"
           />
