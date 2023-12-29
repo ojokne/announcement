@@ -16,7 +16,7 @@ const Review = () => {
   };
 
   const handleNext = () => {
-    // navigate("/create/review");
+    navigate("/create/checkout");
   };
   const handleBack = () => {
     navigate("/create/announcement_details");
