@@ -6,7 +6,7 @@ const AnnouncementDetails = () => {
     navigate("/create/review");
   };
   const handleBack = () => {
-    navigate("/create/personal_details");
+    navigate("/create");
   };
   return (
     <div className="border rounded m-2">
