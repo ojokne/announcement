@@ -23,7 +23,7 @@ const Users = () => {
 
         <p className="">Unfortunately we did not find any users</p>
         <button className="btn bg-primary-color m-3">
-          <Link to="/admin/add-user">Add User</Link>
+          <Link to="/admin/add_user">Add User</Link>
         </button>
       </div>
     </div>
