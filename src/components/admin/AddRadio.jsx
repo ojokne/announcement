@@ -18,7 +18,7 @@ const AddRadio = () => {
 
         {/* radio station frequency */}
         <div class="mb-3">
-          <label for="name" class="form-label">
+          <label for="frequency" class="form-label">
             Frequency
           </label>
           <input
