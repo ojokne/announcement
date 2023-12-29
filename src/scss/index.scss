@@ -5,7 +5,18 @@
 @use "colors";
 @use "menu";
 
-.icon-lg{
-    font-size: 144px;
-    color: colors.$secondary-color;
+.icon-lg {
+  font-size: 144px;
+  color: colors.$secondary-color;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 960px) {
+  .announcementWrapper {
+    width: 800px;
+    margin: 0 auto;
+  }
 }
