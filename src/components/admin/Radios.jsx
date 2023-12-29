@@ -23,7 +23,7 @@ const Radios = () => {
 
         <p className="">Unfortunately we did not find any radio station</p>
         <button className="btn bg-primary-color m-3">
-          <Link to="/admin/add-radio">Add Radio Station</Link>
+          <Link to="/admin/add_radio">Add Radio Station</Link>
         </button>
       </div>
     </div>
