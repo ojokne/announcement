@@ -135,6 +135,12 @@ const Checkout = () => {
           orderRequestResponseData.order_tracking_id
         );
 
+        // save redirect url to local storage
+        localStorage.setItem(
+          "redirectURL",
+          orderRequestResponseData.redirect_url
+        );
+
         // save merchant reference id to local storage
         localStorage.setItem(
           "merchantReference",
