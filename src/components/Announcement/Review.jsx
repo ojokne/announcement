@@ -133,17 +133,23 @@ const Review = () => {
       }, 15000);
     }
 
+    let cost = 0;
     if (categoryId == 1) {
-      setAmount(number * 5000);
+      cost = number * 5000;
+      setAmount(cost);
     }
 
     if (categoryId == 2) {
-      setAmount(number * 7000);
+      cost = number * 7000;
+      setAmount(cost);
     }
 
     if (categoryId == 3) {
-      setAmount(number * 10000);
+      cost = number * 10000;
+      setAmount(cost);
     }
+
+    localStorage.setItem("amount", cost);
   }, []);
 
   if (loading) return <Spinner />;
