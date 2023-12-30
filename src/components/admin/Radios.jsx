@@ -46,9 +46,9 @@ const Radios = () => {
           <i className="bi bi-search icon-lg"></i>
 
           <p className="">Unfortunately we did not find any radio station</p>
-          <button className="btn bg-primary-color m-3">
-            <Link to="/admin/add_radio">Add Radio Station</Link>
-          </button>
+          <Link to="/admin/add_radio">
+            <button className="btn btn-primary m-3">Add Radio Station</button>
+          </Link>
         </div>
       ) : (
         <div className="border rounded mt-3 p-3">
