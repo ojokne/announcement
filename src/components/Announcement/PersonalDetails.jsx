@@ -1,10 +1,49 @@
+import { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 const PersonalDetails = () => {
   const navigate = useNavigate();
-  const handleNext = () => {
+
+  // state to hold form data
+  const [name, setName] = useState("");
+  const [contact, setContact] = useState("");
+
+  // state to hold form errors
+  const [nameError, setNameError] = useState("");
+  const [contactError, setContactError] = useState("");
+
+  const handleNext = (e) => {
+    e.preventDefault();
+
+    // validate the form data
+    if (name === "") {
+      setNameError("Name is required");
+      return;
+    }
+
+    if (contact === "") {
+      setContactError("Contact is required");
+      return;
+    }
+
+    localStorage.setItem("name", name);
+    localStorage.setItem("contact", contact);
+
     navigate("/create/announcement_details");
   };
+
+  useEffect(() => {
+    const name = localStorage.getItem("name");
+    const contact = localStorage.getItem("contact");
+
+    if (name) {
+      setName(name);
+    }
+
+    if (contact) {
+      setContact(contact);
+    }
+  },[])
   return (
     <div className="border rounded m-2">
       <div className="d-flex justify-content-between align-items-center pt-3 m-3 border-bottom">
@@ -24,7 +63,14 @@ const PersonalDetails = () => {
             className="form-control"
             id="name"
             placeholder="John Doe"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              setNameError("");
+            }}
           />
+          {/* error message from form validation */}
+          {nameError && <span className="text-danger">{nameError}</span>}
         </div>
 
         {/* user contact*/}
@@ -37,11 +83,21 @@ const PersonalDetails = () => {
             className="form-control"
             id="contact"
             placeholder="0771234567"
+            value={contact}
+            onChange={(e) => {
+              setContact(e.target.value);
+              setContactError("");
+            }}
           />
+          {/* error message from form validation */}
+          {contactError && <span className="text-danger">{contactError}</span>}
         </div>
 
         <div className="d-flex justify-content-end align-items-center">
-          <button className="btn btn-primary w-25" onClick={() => handleNext()}>
+          <button
+            className="btn btn-primary w-25"
+            onClick={(e) => handleNext(e)}
+          >
             Next
           </button>
         </div>
