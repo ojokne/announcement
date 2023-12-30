@@ -2,8 +2,11 @@ import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import Spinner from "../Spinner";
+import { useNavigate } from "react-router-dom";
 
 const AddRadio = () => {
+  const navigate = useNavigate();
+
   // loading state
   const [loading, setLoading] = useState(false);
 
@@ -11,11 +14,13 @@ const AddRadio = () => {
   const [name, setName] = useState("");
   const [frequency, setFrequency] = useState("");
   const [email, setEmail] = useState("");
+  const [district, setDistrict] = useState("");
 
   // state to hold form errors
   const [nameError, setNameError] = useState("");
   const [frequencyError, setFrequencyError] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [districtError, setDistrictError] = useState("");
 
   // state to hold alerts
   const [alert, setAlert] = useState({
@@ -43,16 +48,24 @@ const AddRadio = () => {
       return;
     }
 
-    let radioName = name[0].toUpperCase() + name.slice(1).toLowerCase();
-    console.log(radioName, frequency, email);
+    if (district === "") {
+      setDistrictError("District is required");
+      return;
+    }
+
+    let radioName = name[0].toUpperCase() + name.slice(1);
+    let districtName = district[0].toUpperCase() + district.slice(1);
+
     try {
       setLoading(true);
 
       // send the data to firebase
-      await addDoc(collection(db, "radioSations"), {
+      await addDoc(collection(db, "radioStations"), {
         name: radioName,
         frequency,
         email,
+        district: districtName,
+        status: "active",
         createdAt: new Date().toISOString(),
       });
 
@@ -69,6 +82,7 @@ const AddRadio = () => {
       setName("");
       setFrequency("");
       setEmail("");
+      setDistrict("");
 
       // stop the spinner
       setLoading(false);
@@ -94,6 +108,13 @@ const AddRadio = () => {
         };
       });
     }
+  };
+
+  const handleCancel = () => {
+    setName("");
+    setFrequency("");
+    setEmail("");
+    navigate("/admin/radios");
   };
   if (loading) {
     return <Spinner />;
@@ -183,8 +204,36 @@ const AddRadio = () => {
           {emailError && <span className="text-danger">{emailError}</span>}
         </div>
 
+        {/* district */}
+        <div className="mb-3">
+          <label htmlFor="district" className="form-label">
+            District
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="district"
+            placeholder="Abim"
+            value={district}
+            onChange={(e) => {
+              setDistrict(e.target.value);
+              setDistrictError("");
+            }}
+          />
+
+          {/* error message from form validation */}
+          {districtError && (
+            <span className="text-danger">{districtError}</span>
+          )}
+        </div>
+
         <div className="d-flex justify-content-between align-items-center">
-          <button className="btn btn-outline-danger">Cancel</button>
+          <button
+            className="btn btn-outline-danger"
+            onClick={() => handleCancel()}
+          >
+            Cancel
+          </button>
           <button className="btn btn-primary" onClick={(e) => handleSubmit(e)}>
             Add
           </button>
