@@ -95,7 +95,7 @@ const AddRadio = () => {
             alert: false,
           };
         });
-      }, 3000);
+      }, 10000);
     } catch (error) {
       setLoading(false);
       console.log(e);
@@ -107,6 +107,15 @@ const AddRadio = () => {
           message: "Something went wrong",
         };
       });
+      // remove the alert after 3 seconds
+      setTimeout(() => {
+        setAlert((prev) => {
+          return {
+            ...prev,
+            alert: false,
+          };
+        });
+      }, 10000);
     }
   };
 
