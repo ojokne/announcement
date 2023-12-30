@@ -27,9 +27,19 @@ const Checkout = () => {
     const handleSubmitOrderRequest = async () => {
       try {
         setLoading(true);
+
+        // clear alerts
+        setAlert((prev) => {
+          return {
+            ...prev,
+            alert: false,
+            message: "",
+          };
+        });
+
         // get auth token
         const response = await fetch(
-          import.meta.env.VITE_PESA_PAL_AUT_ENDPOINT,
+          import.meta.env.VITE_PESA_PAL_AUTH_ENDPOINT,
           {
             method: "POST",
             headers: {
@@ -44,6 +54,27 @@ const Checkout = () => {
         );
         const data = await response.json();
         const token = data.token;
+
+        //create notification id
+        const notificationResponse = await fetch(
+          import.meta.env.VITE_PESA_PAL_REGISTERIPN_ENDPOINT,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              url: import.meta.env.VITE_PESA_PAL_IPN_URL,
+              ipn_notification_type: "GET",
+            }),
+          }
+        );
+
+        const notificationResponseData = await notificationResponse.json();
+
+        const notificationId = notificationResponseData.ipn_id;
 
         // submit order request
 
@@ -65,7 +96,7 @@ const Checkout = () => {
               } through ${radioName}}`,
               callback_url: import.meta.env.VITE_PESA_PAL_CALLBACK_URL,
               cancellation_url: import.meta.env.VITE_PESA_PAL_CANCELLATION_URL,
-              notification_id: import.meta.env.VITE_PESA_PAL_NOTIFICATION_ID,
+              notification_id: notificationId,
               billing_address: {
                 email_address: "",
                 phone_number: contact,
@@ -86,6 +117,15 @@ const Checkout = () => {
 
         const orderRequestResponseData = await orderRequestResponse.json();
 
+        // clear alerts
+        setAlert((prev) => {
+          return {
+            ...prev,
+            alert: false,
+            message: "",
+          };
+        });
+
         // extract redirect url to be used an iframe
         setRedirectURL(orderRequestResponseData.redirect_url);
 
@@ -101,23 +141,10 @@ const Checkout = () => {
           orderRequestResponseData.merchant_reference
         );
 
-        console.log(orderRequestResponseData);
         setLoading(false);
       } catch (error) {
         console.log(error);
         setLoading(false);
-        setAlert((prev) => {
-          return {
-            ...prev,
-            alert: true,
-            message: (
-              <span>
-                An error occured while processing your request, please try again
-                later or contact our support team
-              </span>
-            ),
-          };
-        });
       }
     };
 
