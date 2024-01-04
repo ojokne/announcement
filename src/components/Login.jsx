@@ -1,8 +1,13 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -48,7 +53,33 @@ const Login = () => {
 
     try {
       setLoading(true);
+      // clear alert
+      setAlert((prev) => {
+        return { ...prev, alert: false, message: "" };
+      });
+
+      // sign in
       await signInWithEmailAndPassword(auth, email, password);
+      // fetch user details from users collection
+      const userRef = doc(db, "users", auth.currentUser.uid);
+      const userSnap = await getDoc(userRef);
+      if (userSnap.exists()) {
+        const data = userSnap.data();
+
+        // check if user is admin at radio station
+        if (data.radioId) {
+          // redirect to radio station admin dashboard
+          navigate("/radio");
+        } else {
+          // check if is kakbe admin
+          if (data.isAdmin) {
+            // redirect to kakebe admin dashboard
+            navigate("/admin");
+          }
+        }
+      } else {
+        console.log("No such document!");
+      }
       setLoading(false);
     } catch (e) {
       setLoading(false);
@@ -180,7 +211,12 @@ const Login = () => {
           </div>
 
           <div className="d-flex justify-content-center align-items-center">
-            <button className="btn btn-primary w-100 " onClick={(e)=>handleLogin(e)}>Login</button>
+            <button
+              className="btn btn-primary w-100 "
+              onClick={(e) => handleLogin(e)}
+            >
+              Login
+            </button>
           </div>
         </div>
       </div>
