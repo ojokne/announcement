@@ -100,7 +100,7 @@ const AddUser = () => {
       // stop loading spinner
       setLoading(false);
 
-      // remove the alert after 3 seconds
+      // remove the alert after 10 seconds
       setTimeout(() => {
         setAlert((prev) => {
           return {
@@ -132,7 +132,7 @@ const AddUser = () => {
         }
       }
 
-      // remove the alert after 3 seconds
+      // remove the alert after 10 seconds
       setTimeout(() => {
         setAlert((prev) => {
           return {
