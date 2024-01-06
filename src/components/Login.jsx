@@ -65,9 +65,12 @@ const Login = () => {
       const userSnap = await getDoc(userRef);
       if (userSnap.exists()) {
         const data = userSnap.data();
-
         // check if user is admin at radio station
         if (data.radioId) {
+          // store radio id and radio name in session storage
+          sessionStorage.setItem("radioId", data.radioId);
+          sessionStorage.setItem("radioName", data.radioName);
+
           // redirect to radio station admin dashboard
           navigate("/radio");
         } else {
