@@ -12,7 +12,7 @@ const Users = () => {
     const fetchUsers = async () => {
       // fetch users with radioId
       let radioId = sessionStorage.getItem("radioId");
-      console.log(radioId);
+
       const q = query(collection(db, "users"), where("radioId", "==", radioId));
 
       const response = await getDocs(q);
