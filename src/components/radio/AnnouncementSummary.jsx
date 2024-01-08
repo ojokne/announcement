@@ -6,7 +6,7 @@ const AnnouncementSummary = ({ announcement }) => {
   const handleAnnouncementClick = () => {
     // save announcement to session storage
     sessionStorage.setItem("announcement", JSON.stringify(announcement));
-    navigate(`/announcements/${announcement.id}`);
+    navigate(`/radio/announcements/${announcement.id}`);
   };
   return (
     <div
