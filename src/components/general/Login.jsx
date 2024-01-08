@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../config/firebase";
+import { auth, db } from "../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
