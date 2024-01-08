@@ -1,6 +1,18 @@
+import { useNavigate } from "react-router-dom";
+
 const AnnouncementSummary = ({ announcement }) => {
+  const navigate = useNavigate();
+
+  const handleAnnouncementClick = () => {
+    // save announcement to session storage
+    sessionStorage.setItem("announcement", JSON.stringify(announcement));
+    navigate(`/announcements/${announcement.id}`);
+  };
   return (
-    <div className="border rounded p-3 mb-3 hover">
+    <div
+      className="border rounded p-3 mb-3 hover"
+      onClick={() => handleAnnouncementClick()}
+    >
       <div className="d-flex justify-content-between">
         <div className="d-flex flex-column">
           <span>{announcement.categoryName}</span>

@@ -5,7 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./scss/index.scss";
 import Admin from "./routes/Admin.jsx";
 import Announcement from "./routes/Announcement.jsx";
-import Others from "./routes/Others.jsx";
+import General from "./routes/General.jsx";
 import Radio from "./routes/Radio.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Admin />
       <Announcement />
       <Radio />
-      <Others />
+      <General />
     </BrowserRouter>
   </React.StrictMode>
 );

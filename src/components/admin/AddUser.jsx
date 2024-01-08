@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Spinner from "../Spinner";
+import Spinner from "../general/Spinner";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
 import {

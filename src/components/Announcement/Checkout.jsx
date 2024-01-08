@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Spinner from "../Spinner";
+import Spinner from "../general/Spinner";
 
 const Checkout = () => {
   const [loading, setLoading] = useState(true);

@@ -2,7 +2,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { db } from "../../config/firebase";
 import { useState, useEffect } from "react";
-import Spinner from "../Spinner";
+import Spinner from "../general/Spinner";
 
 const Radios = () => {
   const [radios, setRadios] = useState([]);

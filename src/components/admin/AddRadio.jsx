@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import Spinner from "../Spinner";
+import Spinner from "../general/Spinner";
 import { useNavigate } from "react-router-dom";
 
 const AddRadio = () => {
