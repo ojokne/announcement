@@ -21,13 +21,34 @@ const AnnouncementSummary = ({ announcement }) => {
       onClick={() => handleAnnouncementClick()}
     >
       <div className="d-flex justify-content-between">
-        <div className="d-flex flex-column">
-          {user === "admin" ? <span>{announcement.radioName}</span> : null}
-          <span>{announcement.categoryName}</span>
-          <span>
-            {announcement.numberOfBroadcasts}{" "}
-            {announcement.numberOfBroadcasts == 1 ? "broadcast" : "broadcasts"}
-          </span>
+        <div>
+          {user === "admin" ? (
+            <div>
+              <span>
+                <i className="bi bi-boombox text-primary"></i>
+              </span>
+              <span className="px-3">{announcement.radioName}</span>
+            </div>
+          ) : null}
+
+          <div>
+            <span>
+              <i className="bi bi-tag text-danger"></i>
+            </span>
+            <span className="px-3">{announcement.categoryName}</span>
+          </div>
+
+          <div>
+            <span>
+              <i className="bi bi-broadcast  text-success"></i>
+            </span>
+            <span className="px-3">
+              {announcement.numberOfBroadcasts}{" "}
+              {announcement.numberOfBroadcasts == 1
+                ? "broadcast"
+                : "broadcasts"}
+            </span>
+          </div>
         </div>
         <div>
           <span>
