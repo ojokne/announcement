@@ -12,9 +12,8 @@ const Radio = () => {
     <Routes>
       <Route path="/radio" element={<Wrapper />}>
         <Route index element={<Dashboard />} />
-        <Route path="announcements" element={<AnnouncementsWrapper />}>
-          <Route path=":id" element={<AnnouncementDetails />} />
-        </Route>
+        <Route path="announcements" element={<AnnouncementsWrapper />} />
+        <Route path="announcements/:id" element={<AnnouncementDetails />} />
 
         <Route path="users" element={<Users />} />
         <Route path="add_user" element={<AddUser />} />
