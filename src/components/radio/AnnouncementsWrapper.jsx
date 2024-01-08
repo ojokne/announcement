@@ -86,7 +86,7 @@ const AnnouncementsWrapper = () => {
           Pending
           <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             {pending.length}
-            <span className="visually-hidden">unread messages</span>
+            <span className="visually-hidden">pending announcements</span>
           </span>
         </button>
         <button
@@ -98,7 +98,7 @@ const AnnouncementsWrapper = () => {
           Completed
           <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             {completed.length}
-            <span className="visually-hidden">unread messages</span>
+            <span className="visually-hidden">completed announcements</span>
           </span>
         </button>
         <button
@@ -110,7 +110,7 @@ const AnnouncementsWrapper = () => {
           All
           <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             {announcements.length}
-            <span className="visually-hidden">unread messages</span>
+            <span className="visually-hidden">all announcements</span>
           </span>
         </button>
       </div>
