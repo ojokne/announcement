@@ -1,5 +1,4 @@
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AnnouncementSummary = ({ announcement }) => {
   const navigate = useNavigate();
@@ -57,23 +56,6 @@ const AnnouncementSummary = ({ announcement }) => {
             </span>
             <strong> {announcement.amount.toLocaleString("en-US")}</strong>
           </span>
-        </div>
-      </div>
-
-      <div className="d-flex align-items-center">
-        {announcement.broadcastStatus === "pending" ? (
-          <button className="btn btn-outline-success my-2">
-            Mark as complete
-          </button>
-        ) : null}
-
-        {announcement.broadcastStatus === "completed" ? (
-          <button className="btn btn-outline-success my-2">
-            Mark as pending
-          </button>
-        ) : null}
-        <div>
-          <i className="bi bi-download text-success fs-2 mx-3 hover"></i>
         </div>
       </div>
     </div>
