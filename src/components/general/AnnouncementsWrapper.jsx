@@ -6,9 +6,15 @@ import { db } from "../../config/firebase";
 import Pending from "./Pending";
 import Completed from "./Completed";
 import All from "./All";
+import { useLocation } from "react-router-dom";
 
 const AnnouncementsWrapper = () => {
   const [loading, setLoading] = useState(true);
+
+  const url = useLocation().pathname;
+
+  // get user from url either admin or radio
+  const user = url.split("/")[1];
 
   // state to hold the active tab
   const [active, setActive] = useState("pending");
@@ -29,13 +35,21 @@ const AnnouncementsWrapper = () => {
 
   useEffect(() => {
     const fetchAnnouncements = async () => {
-      // fetch users with radioId
-      let radioId = sessionStorage.getItem("radioId");
+      let q = null;
+      if (user === "admin") {
+        // fetch all announcements
+        q = query(collection(db, "announcements"));
+      }
 
-      const q = query(
-        collection(db, "announcements"),
-        where("radioId", "==", radioId)
-      );
+      if (user === "radio") {
+        // fetch users with radioId
+        let radioId = sessionStorage.getItem("radioId");
+
+        q = query(
+          collection(db, "announcements"),
+          where("radioId", "==", radioId)
+        );
+      }
 
       const response = await getDocs(q);
       setAnnouncements([]);
