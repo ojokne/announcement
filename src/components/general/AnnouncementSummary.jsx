@@ -1,13 +1,20 @@
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const AnnouncementSummary = ({ announcement }) => {
   const navigate = useNavigate();
+
+  const url = useLocation().pathname;
+
+  // get user from url either admin or radio
+  const user = url.split("/")[1];
 
   const handleAnnouncementClick = () => {
     // save announcement to session storage
     sessionStorage.setItem("announcement", JSON.stringify(announcement));
     navigate(`/radio/announcements/${announcement.id}`);
   };
+
   return (
     <div
       className="border rounded p-3 mb-3 hover"
@@ -15,6 +22,7 @@ const AnnouncementSummary = ({ announcement }) => {
     >
       <div className="d-flex justify-content-between">
         <div className="d-flex flex-column">
+          {user === "admin" ? <span>{announcement.radioName}</span> : null}
           <span>{announcement.categoryName}</span>
           <span>
             {announcement.numberOfBroadcasts}{" "}

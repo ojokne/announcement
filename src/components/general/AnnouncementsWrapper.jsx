@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import Spinner from "../general/Spinner";
+import Spinner from "./Spinner";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import Pending from "./Pending";

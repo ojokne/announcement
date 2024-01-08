@@ -4,7 +4,7 @@ import Dashboard from "../components/radio/Dashboard";
 import Wrapper from "../components/radio/Wrapper";
 import Users from "../components/radio/Users";
 import AddUser from "../components/radio/AddUser";
-import AnnouncementsWrapper from "../components/radio/AnnouncementsWrapper";
+import AnnouncementsWrapper from "../components/general/AnnouncementsWrapper";
 import AnnouncementDetails from "../components/general/AnnouncementDetails";
 
 const Radio = () => {
