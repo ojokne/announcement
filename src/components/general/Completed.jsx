@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import AnnouncementSummary from "./AnnouncementSummary";
 
 /**
  *
@@ -23,7 +24,7 @@ const Completed = ({ completed }) => {
       ) : (
         <div>
           {completed.map((announcement, index) => {
-            return <AnnouncementSummary key={index} completed={announcement} />;
+            return <AnnouncementSummary key={index} announcement={announcement} />;
           })}
         </div>
       )}
