@@ -116,7 +116,7 @@ const AnnouncementDetails = () => {
                   </span>
                   <span className="px-3">
                     {announcement.numberOfBroadcasts}{" "}
-                    {announcement.numberOfBroadcasts === 1
+                    {announcement.numberOfBroadcasts == 1
                       ? "broadcast"
                       : "broadcasts"}
                   </span>
