@@ -12,9 +12,12 @@ import { auth, db } from "../../config/firebase";
 import { useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../general/Spinner";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  // state to hold loading status
+  const [loading, setLoading] = useState(true);
 
   // state to hold total amount
   const [amount, setAmount] = useState({
@@ -168,18 +171,13 @@ const Dashboard = () => {
                 corporate: totalCorporate,
               };
             });
+
+            setLoading(false);
           }
         },
         (err) => {
           console.log(err.code);
           setLoading(false);
-          // setAlert((prev) => {
-          //   return {
-          //     ...prev,
-          //     alert: true,
-          //     message: "An error occurred, try reloading",
-          //   };
-          // });
         }
       );
     };
@@ -201,6 +199,9 @@ const Dashboard = () => {
       }
     };
   }, []);
+
+  if (loading) return <Spinner />;
+
   return (
     <div className="mx-3 my-3">
       <h2 className="text-muted fs-3">Dashboard</h2>
