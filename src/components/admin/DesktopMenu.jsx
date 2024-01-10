@@ -1,6 +1,24 @@
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { auth } from "../../config/firebase";
+import { useNavigate } from "react-router-dom";
 
 const DesktopMenu = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    let unsubcribeFromAuth = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate("/login");
+      }
+    });
+
+    return () => {
+      if (unsubcribeFromAuth) {
+        unsubcribeFromAuth();
+      }
+    };
+  }, []);
   return (
     <div>
       <h2 className="p-1">Kakebe</h2>
