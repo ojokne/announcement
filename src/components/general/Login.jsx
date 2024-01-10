@@ -1,10 +1,11 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -122,6 +123,40 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    let unsubcribeFromAuth = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          const data = userSnap.data();
+          // check if user is admin at radio station
+          if (data.radioId) {
+            // store radio id and radio name in session storage
+            sessionStorage.setItem("radioId", data.radioId);
+            sessionStorage.setItem("radioName", data.radioName);
+
+            // redirect to radio station admin dashboard
+            navigate("/radio");
+          } else {
+            // check if is kakbe admin
+            if (data.isAdmin) {
+              // redirect to kakebe admin dashboard
+              navigate("/admin");
+            }
+          }
+        } else {
+          console.log("No such document!");
+        }
+      }
+    });
+
+    return () => {
+      if (unsubcribeFromAuth) {
+        unsubcribeFromAuth();
+      }
+    };
+  }, []);
   if (loading) return <Spinner />;
 
   return (
