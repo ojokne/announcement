@@ -11,7 +11,13 @@ const AnnouncementSummary = ({ announcement }) => {
   const handleAnnouncementClick = () => {
     // save announcement to session storage
     sessionStorage.setItem("announcement", JSON.stringify(announcement));
-    navigate(`/radio/announcements/${announcement.id}`);
+    if (user == "radio") {
+      navigate(`/radio/announcements/${announcement.id}`);
+    }
+
+    if (user == "admin") {
+      navigate(`/admin/announcements/${announcement.id}`);
+    }
   };
 
   return (
