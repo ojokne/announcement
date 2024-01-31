@@ -71,7 +71,11 @@ const Users = () => {
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>{user.contact}</td>
-                    <td>{user.radioName}</td>
+                    {user.radioName === undefined ? (
+                      <td>Admin</td>
+                    ) : (
+                      <td>{user.radioName}</td>
+                    )}
                   </tr>
                 );
               })}
