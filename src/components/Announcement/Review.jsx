@@ -66,6 +66,7 @@ const Review = () => {
         amount: amount,
         createdAt: new Date().toISOString(),
         transactionStatus: "pending",
+        broadcastStatus: "pending",
       });
 
       localStorage.setItem("announcementId", announcement.id);
