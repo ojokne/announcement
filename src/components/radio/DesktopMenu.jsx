@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { auth } from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
+import { handleLogout } from "../../utils/logout";
 
 const DesktopMenu = () => {
   const navigate = useNavigate();
@@ -77,6 +78,12 @@ const DesktopMenu = () => {
               <span className="ms-2">Users</span>
             </div>
           </NavLink>
+        </li>
+        <li className="mt-3 hover" onClick={(e) => handleLogout(e)}>
+          <span>
+            <i className="bi bi-box-arrow-left"></i>
+          </span>
+          <span className="ms-2">Logout</span>
         </li>
       </ul>
     </div>
