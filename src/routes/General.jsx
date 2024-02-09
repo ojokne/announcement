@@ -3,6 +3,7 @@ import { Routes } from "react-router-dom";
 import Login from "../components/general/Login";
 import Cancelled from "../components/Announcement/Cancelled";
 import Success from "../components/Announcement/Success";
+import About from "../components/general/About";
 
 const General = () => {
   return (
@@ -10,6 +11,8 @@ const General = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/cancelled" element={<Cancelled />} />
       <Route path="/success" element={<Success />} />
+      <Route path="/about" element={<About />} />
+
     </Routes>
   );
 };
