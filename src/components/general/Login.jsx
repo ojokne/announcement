@@ -7,6 +7,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import logo from "../../assets/kakebe-logo.png";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -161,108 +163,123 @@ const Login = () => {
   if (loading) return <Spinner />;
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center flex-column bg-light"
-      style={{ height: "100vh" }}
-    >
-      <div>
-        <img src={logo} className="rounded-circle" alt="Kakebe logo"  width={80}/>
-      </div>
-      <h1 className="fs-4 text-muted text-center my-4 lead">
-        Welcome, please login
-      </h1>
-      <div className="bg-white shadow-sm rounded p-3" style={{ width: "400px" }}>
-        {alert.alert === true ? (
+    <div className="d-flex flex-column vh-100">
+      <div className="flex-grow-1">
+        <Header />
+        <div
+          className="d-flex justify-content-center align-items-center flex-column bg-light mt-4"
+        >
+          <div>
+            <img
+              src={logo}
+              className="rounded-circle"
+              alt="Kakebe logo"
+              width={80}
+            />
+          </div>
+          <h1 className="fs-4 text-muted text-center my-4 lead">
+            Welcome, please login
+          </h1>
           <div
-            className="alert alert-danger alert-dismissible fade show m-3"
-            role="alert"
+            className="bg-white shadow-sm rounded p-3"
+            style={{ width: "400px" }}
           >
-            {alert.message}
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
-        ) : null}
-        <div className="px-3 pb-3">
-          {/* email*/}
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              placeholder="someone@example.com"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setEmailError("");
-              }}
-            />
-            {/* error message from form validation */}
-            {emailError && <span className="text-danger">{emailError}</span>}
-          </div>
-
-          {/* user contact*/}
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              ref={passwordRef}
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setPasswordError("");
-              }}
-            />
-            {/* error message from form validation */}
-            {passwordError && (
-              <span className="text-danger">{passwordError}</span>
-            )}
-          </div>
-
-          <div className="my-3 d-flex justify-content-between">
-            <div className="form-check">
-              <input
-                ref={showPasswordRef}
-                type="checkbox"
-                className="form-check-input"
-                id="showPassword"
-                onChange={() => handleShowPassword()}
-              />
-              <label className="form-check-label" htmlFor="showPassword">
-                show password
-              </label>
-            </div>
-
-            <div>
-              <Link
-                to="/reset_password"
-                className="text-decoration-none ridelink-color"
+            {alert.alert === true ? (
+              <div
+                className="alert alert-danger alert-dismissible fade show m-3"
+                role="alert"
               >
-                Forgot password?
-              </Link>
-            </div>
-          </div>
+                {alert.message}
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+            ) : null}
+            <div className="px-3 pb-3">
+              {/* email*/}
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  placeholder="someone@example.com"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setEmailError("");
+                  }}
+                />
+                {/* error message from form validation */}
+                {emailError && (
+                  <span className="text-danger">{emailError}</span>
+                )}
+              </div>
 
-          <div className="d-flex justify-content-center align-items-center">
-            <button
-              className="btn btn-primary w-100 "
-              onClick={(e) => handleLogin(e)}
-            >
-              Login
-            </button>
+              {/* user contact*/}
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  ref={passwordRef}
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordError("");
+                  }}
+                />
+                {/* error message from form validation */}
+                {passwordError && (
+                  <span className="text-danger">{passwordError}</span>
+                )}
+              </div>
+
+              <div className="my-3 d-flex justify-content-between">
+                <div className="form-check">
+                  <input
+                    ref={showPasswordRef}
+                    type="checkbox"
+                    className="form-check-input"
+                    id="showPassword"
+                    onChange={() => handleShowPassword()}
+                  />
+                  <label className="form-check-label" htmlFor="showPassword">
+                    show password
+                  </label>
+                </div>
+
+                <div>
+                  <Link
+                    to="/reset_password"
+                    className="text-decoration-none ridelink-color"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
+              </div>
+
+              <div className="d-flex justify-content-center align-items-center">
+                <button
+                  className="btn btn-primary w-100 "
+                  onClick={(e) => handleLogin(e)}
+                >
+                  Login
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
