@@ -95,6 +95,7 @@ const Review = () => {
   };
 
   useEffect(() => {
+    const percentage = 0.1;
     if (
       name == null ||
       contact == null ||
@@ -137,17 +138,17 @@ const Review = () => {
     let cost = 0;
     if (categoryId == 1) {
       cost = number * 5000;
-      setAmount(cost);
+      setAmount(cost + cost * percentage);
     }
 
     if (categoryId == 2) {
       cost = number * 7000;
-      setAmount(cost);
+      setAmount(cost + cost * percentage);
     }
 
     if (categoryId == 3) {
       cost = number * 10000;
-      setAmount(cost);
+      setAmount(cost + cost * percentage);
     }
 
     localStorage.setItem("amount", cost);
