@@ -1,7 +1,7 @@
 import Footer from "../general/Footer";
 import Header from "../general/Header";
 
-const Contatc = () => {
+const Contact = () => {
   return (
     <div className="d-flex flex-column vh-100">
       <div className="flex-grow-1">
@@ -17,4 +17,4 @@ const Contatc = () => {
   );
 };
 
-export default Contatc;
+export default Contact;

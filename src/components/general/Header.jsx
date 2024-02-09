@@ -20,10 +20,10 @@ const Header = () => {
             <Link to="/login" className="px-3 text-white">
               Login
             </Link>
-            <Link to="about" className="px-3 text-white">
+            <Link to="/about" className="px-3 text-white">
               About
             </Link>
-            <Link to="contact" className="px-3 text-white">
+            <Link to="/contact" className="px-3 text-white">
               Contact
             </Link>
           </div>
