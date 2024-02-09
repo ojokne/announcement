@@ -84,6 +84,12 @@ const AnnouncementDetails = () => {
     }
   };
 
+  // function to navigate back to list of announcements
+  const handleBack = () => {
+    const user = url.split("/")[1];
+    navigate(`/${user}/announcements`);
+  };
+
   useEffect(() => {
     const announcementId = url.split("/")[3];
 
@@ -231,9 +237,9 @@ const AnnouncementDetails = () => {
         )}
 
         <div>
-          <Link to="/radio/announcements">
-            <button className="btn btn-primary">Back</button>
-          </Link>
+          <button className="btn btn-primary" onClick={() => handleBack()}>
+            Back
+          </button>
         </div>
       </div>
     </div>
