@@ -163,7 +163,7 @@ const Login = () => {
   return (
     <div
       className="d-flex justify-content-center align-items-center flex-column bg-light"
-      style={{ height: "100dvh" }}
+      style={{ height: "100vh" }}
     >
       <div>
         <img src={logo} className="rounded-circle" alt="Kakebe logo"  width={80}/>
@@ -171,7 +171,7 @@ const Login = () => {
       <h1 className="fs-4 text-muted text-center my-4 lead">
         Welcome, please login
       </h1>
-      <div className="bg-white shadow rounded p-3" style={{ width: "400px" }}>
+      <div className="bg-white shadow-sm rounded p-3" style={{ width: "400px" }}>
         {alert.alert === true ? (
           <div
             className="alert alert-danger alert-dismissible fade show m-3"

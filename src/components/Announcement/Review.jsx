@@ -157,12 +157,12 @@ const Review = () => {
   if (loading) return <Spinner />;
 
   return (
-    <div className="border rounded m-2">
+    <div className="bg-white shadow-sm rounded m-2">
       <div className="d-flex justify-content-between align-items-center pt-3 m-3 border-bottom">
         <div>
-          <h1 className="lead muted">Review</h1>
+          <h1 className="lead text-muted">Review</h1>
         </div>
-        <span>3 of 3</span>
+        <span className="text-primary">3 of 3</span>
       </div>
 
       {alert.alert === true ? (

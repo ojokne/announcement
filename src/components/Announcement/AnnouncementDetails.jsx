@@ -115,14 +115,14 @@ const AnnouncementDetails = () => {
   if (loading) return <Spinner />;
 
   return (
-    <div className="border rounded m-2">
+    <div className="bg-white shadow-sm rounded m-2">
       <div className="d-flex justify-content-between align-items-center pt-3 m-3 border-bottom">
         <div>
-          <h1 className="lead muted">Announcement Details</h1>
+          <h1 className="lead text-muted">Announcement Details</h1>
         </div>
-        <span>2 of 3</span>
+        <span className="text-primary">2 of 3</span>
       </div>
-      <div className="bg-light rounded p-3 m-3">
+      <div className="rounded px-3 pb-3 mx-3 mb-3">
         {/* radio station user works at */}
         <div className="mb-3">
           <label htmlFor="radio" className="form-label">

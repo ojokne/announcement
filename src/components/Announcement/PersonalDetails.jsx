@@ -45,17 +45,17 @@ const PersonalDetails = () => {
     }
   },[])
   return (
-    <div className="border rounded m-2">
+    <div className="bg-white shadow-sm rounded m-2">
       <div className="d-flex justify-content-between align-items-center pt-3 m-3 border-bottom">
         <div>
-          <h1 className="lead muted">Personal Details</h1>
+          <h1 className="lead text-muted">Personal Details</h1>
         </div>
-        <span>1 of 3</span>
+        <span className="text-primary">1 of 3</span>
       </div>
-      <div className=" bg-light rounded p-3 m-3">
+      <div className="rounded p-3 m-3">
         {/* user name */}
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">
+          <label htmlFor="name" className="form-label text-muted">
             Name
           </label>
           <input
@@ -75,7 +75,7 @@ const PersonalDetails = () => {
 
         {/* user contact*/}
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">
+          <label htmlFor="name" className="form-label text-muted">
             Contact
           </label>
           <input

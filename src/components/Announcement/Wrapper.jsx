@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 const Wrapper = () => {
   return (
-    <div className="announcementWrapper">
+    <div className="announcementWrapper mt-4">
       <Outlet />
     </div>
   );

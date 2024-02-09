@@ -91,7 +91,7 @@ const Checkout = () => {
               id: announcementId,
               currency: "UGX",
               amount: amount,
-              description: `Pay for your annoucement to be broadcast ${number} ${
+              description: `Pay for your annoucement id ${announcementId} to be broadcast ${number} ${
                 number == 1 ? "time" : "times"
               } through ${radioName}}`,
               callback_url: import.meta.env.VITE_PESA_PAL_CALLBACK_URL,
@@ -202,12 +202,11 @@ const Checkout = () => {
   if (loading) return <Spinner />;
 
   return (
-    <div>
+    <div className="bg-white shadow-sm rounded">
       <div className="d-flex justify-content-between align-items-center pt-3 m-3 border-bottom">
         <div>
-          <h1 className="lead muted">Checkout</h1>
+          <h1 className="lead text-muted">Checkout</h1>
         </div>
-        <span>finally</span>
       </div>
 
       {alert.alert === true ? (
