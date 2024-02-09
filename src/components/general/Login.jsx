@@ -6,6 +6,7 @@ import { auth, db } from "../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import logo from "../../assets/kakebe-logo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -161,12 +162,16 @@ const Login = () => {
 
   return (
     <div
-      className="d-flex justify-content-center align-items-center"
+      className="d-flex justify-content-center align-items-center flex-column bg-light"
       style={{ height: "100dvh" }}
     >
-      <div className="border rounded p-4" style={{ width: "400px" }}>
-        <h1 className="fs-4 text-muted text-center">Welcome, please login</h1>
-
+      <div>
+        <img src={logo} className="rounded-circle" alt="Kakebe logo"  width={80}/>
+      </div>
+      <h1 className="fs-4 text-muted text-center my-4 lead">
+        Welcome, please login
+      </h1>
+      <div className="bg-white shadow rounded p-3" style={{ width: "400px" }}>
         {alert.alert === true ? (
           <div
             className="alert alert-danger alert-dismissible fade show m-3"
