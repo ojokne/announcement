@@ -16,3 +16,37 @@
 .outlet {
   margin-left: variables.$desktop-menu-width;
 }
+
+.smallMenuItems {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.showSmallMenuItems {
+  animation: slideInFromRight 1s forwards;
+}
+
+.hideSmallMenuItems {
+  animation: slideOutToRight 1s forwards;
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutToRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
