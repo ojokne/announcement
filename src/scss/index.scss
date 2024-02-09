@@ -5,6 +5,9 @@
 @use "colors";
 @use "menu";
 
+body{
+  background-color: #f8f9fa;
+}
 .icon-lg {
   font-size: 144px;
   color: colors.$secondary-color;
