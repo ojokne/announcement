@@ -6,7 +6,7 @@ const Success = () => {
     <div className="d-flex flex-column vh-100">
       <div className="flex-grow-1">
         <Header />
-        <div className="announcementWrapper mt-4 mx-3">
+        <div className="announcementWrapper mt-4">
           <div className="bg-white p-3 m-3 rounded shadow-sm d-flex justify-content-center align-items-center flex-column">
             <span>
               <i className="bi bi-check-circle text-success fs-1"></i>
