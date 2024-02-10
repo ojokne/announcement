@@ -3,7 +3,7 @@ import logo from "../../assets/kakebe-logo.png";
 import { useState } from "react";
 
 const Header = () => {
-  const [style, setStyle] = useState("");
+  const [style, setStyle] = useState("d-none");
 
   // function to show the menu
   const showMenu = () => {
@@ -14,8 +14,9 @@ const Header = () => {
   const hideMenu = () => {
     setStyle("hideSmallMenuItems");
   };
+
   return (
-    <div className="bg-dark p-2">
+    <div className="bg-black p-2">
       <div className="container">
         {/* header large screens */}
         <div className="d-none d-lg-block">
@@ -98,21 +99,32 @@ const Header = () => {
                   <i className="bi bi-x-lg fs-1 text-white"></i>
                 </span>
               </div>
-              <Link to="/login" className="p-3 text-white menu-item px-3 py-2 rounded">
-                Login
-              </Link>
-              <Link
-                to="/create"
-                className="px-3 text-white menu-item px-3 py-2 rounded"
-              >
-                Send Announcement
-              </Link>
-              <Link to="/about" className="p-3 text-white menu-item px-3 py-2 rounded">
-                About
-              </Link>
-              <Link to="/contact" className="p-3 text-white menu-item px-3 py-2 rounded">
-                Contact
-              </Link>
+              <div className="d-flex flex-column mt-4">
+                <Link
+                  to="/login"
+                  className="p-3 text-white menu-item px-3 py-2 rounded"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/create"
+                  className="px-3 text-white menu-item px-3 py-2 rounded"
+                >
+                  Send Announcement
+                </Link>
+                <Link
+                  to="/about"
+                  className="p-3 text-white menu-item px-3 py-2 rounded"
+                >
+                  About
+                </Link>
+                <Link
+                  to="/contact"
+                  className="p-3 text-white menu-item px-3 py-2 rounded"
+                >
+                  Contact
+                </Link>
+              </div>
             </div>
           </div>
         </div>
