@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Footer from "../general/Footer";
 import Header from "../general/Header";
 
@@ -12,6 +13,9 @@ const Success = () => {
               <i className="bi bi-check-circle text-success fs-1"></i>
             </span>
             <span className="text-muted">Your payment was successful</span>
+            <span className="m-3">
+              <Link to="/create">Send another announcement</Link>
+            </span>
           </div>
         </div>
       </div>
