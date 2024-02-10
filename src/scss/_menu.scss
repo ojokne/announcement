@@ -34,11 +34,11 @@
 }
 
 .showSmallMenuItems {
-  animation: slideInFromRight 1s forwards;
+  animation: slideInFromRight .5s forwards;
 }
 
 .hideSmallMenuItems {
-  animation: slideOutToRight 1s forwards;
+  animation: slideOutToRight .5s forwards;
 }
 
 @keyframes slideInFromRight {
