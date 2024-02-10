@@ -31,13 +31,28 @@ const Header = () => {
               <h1 className="lead ms-2 text-white">Kakebe</h1>
             </div>
             <div>
-              <Link to="/login" className="px-3 text-white">
+              <Link
+                to="/login"
+                className="px-3 text-white menu-item px-3 py-2 rounded"
+              >
                 Login
               </Link>
-              <Link to="/about" className="px-3 text-white">
+              <Link
+                to="/create"
+                className="px-3 text-white menu-item px-3 py-2 rounded"
+              >
+                Send Announcement
+              </Link>
+              <Link
+                to="/about"
+                className="px-3 text-white menu-item px-3 py-2 rounded"
+              >
                 About
               </Link>
-              <Link to="/contact" className="px-3 text-white">
+              <Link
+                to="/contact"
+                className="px-3 text-white menu-item px-3 py-2 rounded"
+              >
                 Contact
               </Link>
             </div>
@@ -65,7 +80,9 @@ const Header = () => {
             </div>
 
             {/* small screen menu items */}
-            <div className={`d-flex flex-column  bg-black p-3 smallMenuItems ${style}`}>
+            <div
+              className={`d-flex flex-column  bg-black p-3 smallMenuItems ${style}`}
+            >
               <div className="d-flex justify-content-between">
                 <div className="d-flex align-items-center">
                   <img
@@ -81,13 +98,19 @@ const Header = () => {
                   <i className="bi bi-x-lg fs-1 text-white"></i>
                 </span>
               </div>
-              <Link to="/login" className="p-3 text-white">
+              <Link to="/login" className="p-3 text-white menu-item px-3 py-2 rounded">
                 Login
               </Link>
-              <Link to="/about" className="p-3 text-white">
+              <Link
+                to="/create"
+                className="px-3 text-white menu-item px-3 py-2 rounded"
+              >
+                Send Announcement
+              </Link>
+              <Link to="/about" className="p-3 text-white menu-item px-3 py-2 rounded">
                 About
               </Link>
-              <Link to="/contact" className="p-3 text-white">
+              <Link to="/contact" className="p-3 text-white menu-item px-3 py-2 rounded">
                 Contact
               </Link>
             </div>
