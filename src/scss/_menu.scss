@@ -13,6 +13,14 @@
   bottom: 0;
 }
 
+.menu-item {
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(61, 61, 61, 0.9);
+
+  }
+}
+
 .outlet {
   margin-left: variables.$desktop-menu-width;
 }
