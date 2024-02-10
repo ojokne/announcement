@@ -61,7 +61,7 @@ const Header = () => {
         </div>
 
         {/* header for small screesn */}
-        <div className="d-lg-none">
+        <div className="d-lg-none py-2">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
               <img
@@ -71,7 +71,7 @@ const Header = () => {
                 width={40}
               />
 
-              <h1 className="lead ms-2 text-white">Kakebe</h1>
+              <h1 className="lead ms-2 text-white">Kakebe Technologies</h1>
             </div>
 
             <div onClick={() => showMenu()}>
