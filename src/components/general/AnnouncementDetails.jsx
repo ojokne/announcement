@@ -5,6 +5,8 @@ import { db } from "../../config/firebase";
 import Spinner from "./Spinner";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import AnnouncementPDF from "./AnnouncementPDF";
 
 const AnnouncementDetails = () => {
   const navigate = useNavigate();
@@ -139,21 +141,53 @@ const AnnouncementDetails = () => {
   return (
     <div className="m-4">
       <div>
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between align-items-center">
           <h2 className="text-muted fs-3">Announcement Details</h2>
-          <div>
+          <div className="d-flex justify-content-between align-items-center">
+            {/* download button */}
+            <PDFDownloadLink
+              document={<AnnouncementPDF announcement={announcement} />}
+              // fileName={`announcement-${announcement.id}.pdf`}
+              fileName="announcement.pdf"
+            >
+              {({ blob, url, loading, error }) => {
+                return loading ? (
+                  <div className="px-2">
+                    <span>Generating pdf...</span>
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      className="btn btn-outline-primary mx-2"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <span className="pe-2">
+                        <i className="bi bi-download"></i>
+                      </span>
+                      <span>Download</span>
+                    </button>
+                  </div>
+                );
+              }}
+            </PDFDownloadLink>
             {announcement.broadcastStatus === "pending" ? (
               <button
                 className="btn btn-primary"
                 onClick={() => handleMarkAsComplete()}
               >
-                Mark as Complete
+                <span className="pe-2">
+                  <i className="bi bi-check-lg text-white"></i>
+                </span>
+                <span>Mark as Complete</span>
               </button>
             ) : (
               <button
                 className="btn btn-primary"
                 onClick={() => handleMarkAsPending()}
               >
+                <span className="pe-2">
+                  <i className="bi bi-check-lg text-white"></i>
+                </span>
                 Mark as Pending
               </button>
             )}

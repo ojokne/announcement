@@ -1,4 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import AnnouncementPDF from "./AnnouncementPDF";
 
 const AnnouncementSummary = ({ announcement }) => {
   const navigate = useNavigate();
@@ -18,6 +20,12 @@ const AnnouncementSummary = ({ announcement }) => {
     if (user == "admin") {
       navigate(`/admin/announcements/${announcement.id}`);
     }
+  };
+
+  const handleDownload = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Download");
   };
 
   return (
@@ -53,6 +61,36 @@ const AnnouncementSummary = ({ announcement }) => {
                 ? "broadcast"
                 : "broadcasts"}
             </span>
+          </div>
+
+          {/* action buttons */}
+          <div className="mt-3 d-flex">
+            <PDFDownloadLink
+              document={<AnnouncementPDF announcement={announcement} />}
+              // fileName={`announcement-${announcement.id}.pdf`}
+              fileName="announcement.pdf"
+            >
+              {({ blob, url, loading, error }) => {
+                return loading ? (
+                  <div className="my-3">
+                    <span>Generating pdf...</span>
+                  </div>
+                ) : (
+                  <div className="my-3">
+                   
+                    <button
+                      className="btn btn-outline-primary"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <span className="pe-2">
+                        <i className="bi bi-download"></i>
+                      </span>
+                      <span>Download</span>
+                    </button>
+                  </div>
+                );
+              }}
+            </PDFDownloadLink>
           </div>
         </div>
         <div>
