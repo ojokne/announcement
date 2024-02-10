@@ -68,6 +68,8 @@ const Dashboard = () => {
             setDisplay(false);
             setLoading(false);
           } else {
+            let percentage = 0.1;
+
             let totalAmount = 0;
             let amountDeath = 0;
             let amountBusiness = 0;
@@ -133,12 +135,18 @@ const Dashboard = () => {
             }
 
             setAmount((prev) => {
+              console.log(
+                totalAmount,
+                amountDeath,
+                amountBusiness,
+                amountCorporate
+              );
               return {
                 ...prev,
-                total: totalAmount,
-                death: amountDeath,
-                business: amountBusiness,
-                corporate: amountCorporate,
+                total: totalAmount - totalAmount * percentage,
+                death: amountDeath - amountDeath * percentage,
+                business: amountBusiness - amountBusiness * percentage,
+                corporate: amountCorporate - amountCorporate * percentage,
               };
             });
 
