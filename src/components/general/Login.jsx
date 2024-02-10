@@ -6,7 +6,6 @@ import { auth, db } from "../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import logo from "../../assets/kakebe-logo.png";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -167,14 +166,6 @@ const Login = () => {
       <div className="flex-grow-1">
         <Header />
         <div className="d-flex justify-content-center align-items-center flex-column bg-light mt-4">
-          <div>
-            <img
-              src={logo}
-              className="rounded-circle"
-              alt="Kakebe logo"
-              width={80}
-            />
-          </div>
           <h1 className="fs-4 text-muted text-center my-4 lead">
             Welcome, please login
           </h1>
