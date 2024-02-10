@@ -202,7 +202,7 @@ const Checkout = () => {
   if (loading) return <Spinner />;
 
   return (
-    <div className="bg-white shadow-sm rounded mb-3">
+    <div className="bg-white shadow-sm rounded mb-3 mx-3">
       <div className="d-flex justify-content-between align-items-center pt-3 m-3 border-bottom">
         <div>
           <h1 className="lead text-muted">Checkout</h1>

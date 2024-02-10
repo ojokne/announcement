@@ -166,9 +166,7 @@ const Login = () => {
     <div className="d-flex flex-column vh-100">
       <div className="flex-grow-1">
         <Header />
-        <div
-          className="d-flex justify-content-center align-items-center flex-column bg-light mt-4"
-        >
+        <div className="d-flex justify-content-center align-items-center flex-column bg-light mt-4">
           <div>
             <img
               src={logo}
@@ -180,10 +178,7 @@ const Login = () => {
           <h1 className="fs-4 text-muted text-center my-4 lead">
             Welcome, please login
           </h1>
-          <div
-            className="bg-white shadow-sm rounded p-3"
-            style={{ width: "400px" }}
-          >
+          <div className="bg-white shadow-sm rounded p-3 mx-3">
             {alert.alert === true ? (
               <div
                 className="alert alert-danger alert-dismissible fade show m-3"

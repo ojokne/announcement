@@ -157,7 +157,7 @@ const Review = () => {
   if (loading) return <Spinner />;
 
   return (
-    <div className="bg-white shadow-sm rounded m-2">
+    <div className="bg-white shadow-sm rounded m-2 mx-3">
       <div className="d-flex justify-content-between align-items-center pt-3 m-3 border-bottom">
         <div>
           <h1 className="lead text-muted">Review</h1>
