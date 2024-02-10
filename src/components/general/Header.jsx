@@ -124,6 +124,10 @@ const Header = () => {
                 >
                   Contact
                 </Link>
+
+                <span className="text-white px-3 fixed-bottom m-3">
+                  &copy; Kakebe Technologies {new Date().getFullYear()}
+                </span>
               </div>
             </div>
           </div>
