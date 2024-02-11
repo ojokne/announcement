@@ -96,7 +96,10 @@ const Header = () => {
             className={`d-flex flex-column  bg-black p-3 smallMenuItems ${style}`}
           >
             <div className="d-flex justify-content-between">
-              <div className="d-flex align-items-center">
+              <div
+                className="d-flex align-items-center"
+                onClick={() => navigateHome()}
+              >
                 <img
                   src={logo}
                   className="rounded-circle"
